@@ -11,8 +11,6 @@ from ElasPut import PutDoc
 def check_directory(_directory):
     if not os.path.exists(_directory):
         os.mkdir(_directory)
-    else:
-        print(f"{directory} - Dir already exist!")
 
 
 api_used = ["cmhl", "mit", "zait", "ccn", "oway", "auderbox"]
