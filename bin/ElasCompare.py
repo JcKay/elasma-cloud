@@ -65,4 +65,3 @@ class ElasCompare:
                 self.total_dps += dps_to_total_dps(eid['pri_store_size'])
                 self.logs.add_to_logs(filename=string, source=eid, dps=eid['pri_store_size'])
         self.logs.add_to_logs(filename='tdpss-', source="tdpss-", dps=self.total_dps)
-

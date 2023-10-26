@@ -25,4 +25,4 @@ for name in api_used:
 
     check_directory(_directory=directory)
     dps = ElasCompare(filtered_index_data, directory=directory).compare_index()
-    # PutDoc(name, connector).put_doc()
+    PutDoc(name, connector, directory).put_doc()

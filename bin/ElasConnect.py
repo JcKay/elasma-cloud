@@ -9,8 +9,6 @@ class ElasConnect:
         self.name = name
 
     def elas_connect(self):
-        print("Loading ES : #i wanna add sec later")
-
         elasticsearch_url = ElasURLs(f"{self.name}").elas_url()
         apikey = ElasAPIkeys(f"{self.name}").elas_apikey()
 
