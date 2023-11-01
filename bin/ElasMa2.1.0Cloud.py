@@ -21,7 +21,7 @@ for name in api_used:
     modules = ElasModules(name).elas_modules()
     filtered_index_data = ElasIndex(elas_index_data, modules).get_index_data()
 
-    directory = f"~/elasma-cloud/logs/{name}"
+    directory = f"/home/ubuntu/elasma-cloud/logs/{name}"
 
     check_directory(_directory=directory)
     dps = ElasCompare(filtered_index_data, directory=directory).compare_index()
