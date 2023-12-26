@@ -13,13 +13,19 @@ def dps_to_total_dps(dps):
         return 0
 
 
-def calc_dps(_eid_pss, _lid_pss):
+def calc_dps(_eid_pss, _lid_pss, _eid_ss, _lid_ss):
     _eid_pss_ft = float(_eid_pss[:-2])
+    _eid_ss_ft = float(_eid_ss[:-2])
     _lid_pss_ft = float(_lid_pss[:-2])
+    _lid_ss_ft = float(_lid_ss[:-2])
     if _eid_pss.endswith('gb') and _lid_pss.endswith("gb"):
         _dps = _eid_pss_ft - _lid_pss_ft
         if _dps < 0:
-            _dps = _eid_pss_ft
+            _dps = _eid_ss_ft - _lid_ss_ft
+            if _dps < 0:
+                _dps = _eid_pss_ft
+            else:
+                _dps = _dps / 2
         _dps = str(round(_dps, 2)) + "gb"
         return _dps
 
@@ -34,7 +40,11 @@ def calc_dps(_eid_pss, _lid_pss):
     else:
         _dps = _eid_pss_ft - _lid_pss_ft
         if _dps < 0:
-            _dps = _eid_pss_ft
+            _dps = _eid_ss_ft - _lid_ss_ft
+            if _dps < 0:
+                _dps = _eid_pss_ft
+            else:
+                _dps = _dps / 2
         _dps = str(round(_dps, 2)) + "mb"
         return _dps
 
@@ -57,7 +67,9 @@ class ElasCompare:
                 else:
                     eid_pss = eid["pri_store_size"]
                     lid_pss = lid["pri_store_size"]
-                    dps = calc_dps(eid_pss, lid_pss)
+                    eid_ss = eid["store_size"]
+                    lid_ss = lid["store_size"]
+                    dps = calc_dps(eid_pss, lid_pss, eid_ss, lid_ss)
                     self.total_dps += dps_to_total_dps(dps)
                     self.logs.add_to_logs(filename=string, source=eid, dps=dps)
 
